@@ -1,4 +1,4 @@
-module github.com/DVSoftware/go-cryptoapi/v2
+module github.com/DVSoftware/go-cryptoapi
 
 go 1.12
 
