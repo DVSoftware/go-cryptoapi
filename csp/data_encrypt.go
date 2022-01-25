@@ -51,19 +51,19 @@ import (
 
 // EncryptData encrypts arbitrary byte slice for one or more recipient
 // certificates
-func EncryptData(provider CryptoProvider, type ProvType, data []byte, options EncryptOptions) (_ []byte, rErr error) {
+func EncryptData(ctx Ctx, data []byte, options EncryptOptions) (_ []byte, rErr error) {
 	if len(options.Receivers) == 0 {
 		return nil, fmt.Errorf("Receivers certificates list is empty")
 	}
-	ctx, err := AcquireCtx("", provider, type, CryptVerifyContext)
-	if err != nil {
-		return nil, err
-	}
-	defer func() {
-		if err := ctx.Close(); err != nil {
-			rErr = fmt.Errorf("Encrypting data: %v (original error: %v)", err, rErr)
-		}
-	}()
+// 	ctx, err := AcquireCtx("", provider, type, CryptVerifyContext)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	defer func() {
+// 		if err := ctx.Close(); err != nil {
+// 			rErr = fmt.Errorf("Encrypting data: %v (original error: %v)", err, rErr)
+// 		}
+// 	}()
 	edp := C.mkEncryptDataParams(ctx.hProv, C.int(len(options.Receivers)))
 	defer C.freeEncryptDataParams(edp)
 
