@@ -51,7 +51,7 @@ import (
 
 // EncryptData encrypts arbitrary byte slice for one or more recipient
 // certificates
-func EncryptData(ctx Ctx, data []byte, options EncryptOptions) (_ []byte, rErr error) {
+func EncryptData(ctx *Ctx, data []byte, options EncryptOptions) (_ []byte, rErr error) {
 	if len(options.Receivers) == 0 {
 		return nil, fmt.Errorf("Receivers certificates list is empty")
 	}
